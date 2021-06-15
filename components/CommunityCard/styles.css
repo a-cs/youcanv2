@@ -1,0 +1,42 @@
+.CommunityCard{
+    border: 1px solid #C1C1C1;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-top: 2.1rem;
+    margin-bottom: 2.1rem;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.CommunityCard img{
+    width: 104px;
+    height: 104px;
+    border-radius: 50%;
+    align-self: center;
+}
+
+.CommunityCard h5{
+    font-size: 2.1rem;
+    padding-top: 1.7rem;
+    color: #1E1B1B;
+}
+
+.CommunityCard h6{
+    font-size: 1.9rem;
+    font-weight: normal;
+    color: #1E1B1B;
+    padding-top: 0.5rem;
+    line-height: 24px;
+}
+
+@media (min-width: 700px){
+    .CommunityCard{
+        margin: .5rem;
+
+        flex-direction: row;
+    }
+}
+
+
+

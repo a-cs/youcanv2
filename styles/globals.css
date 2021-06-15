@@ -1,9 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&family=Work+Sans:wght@500;800&display=swap');
+
+:root{
+  font-size: 62.5%;
+
+  --color-background: #E5E5E5;
+  --color-primary:#9A0FAF;
+  --color-secundary:#F07D12;
+  --color-text-base: #221E1E;
+  --color-logo: #000000;
+  --color-nav: #090909;
+}
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: Roboto
 }
 
 a {
@@ -12,5 +21,7 @@ a {
 }
 
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
