@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
+import EventCard from '../components/EventCard';
 
 export default function Home() {
   return (
@@ -11,7 +12,23 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1>Hello</h1>
+      <div className={styles.content}>
+        <h3>Hello</h3>
+        <h3>Nossa Comunidade</h3>
+        <h3>Depoimentos</h3>
+        <h3>Eventos</h3>
+        <div className={styles.events}>
+          <EventCard />
+          <EventCard />
+          <EventCard />
+          <EventCard />
+          <EventCard />
+          <EventCard />
+          <EventCard />
+          <EventCard />
+          <EventCard />
+        </div>
+      </div>
     </div>
   );
 }

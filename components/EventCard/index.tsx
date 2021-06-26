@@ -1,20 +1,21 @@
-import React from "react";
+import React from 'react';
 
+import styles from './EventCard.module.css';
 
-import "./styles.css"
-
-
-function EventCard(props:any) {
-    return (
-
-        <div className="Card">
-            <h3>{props.title}</h3>
-            <h4>{props.description}</h4>
-            <div className="emptySpace"/>
-            <h5>Onde e Quando?</h5>
-            <h6>Evento online, dia {props.date}</h6>
-        </div>
-    )
+function EventCard() {
+  return (
+    <div className={styles.Card}>
+      <div className={styles.Title}>
+        <h3>OPEN INOVATION</h3>
+      </div>
+      <div className={styles.Text}>
+        <h4>
+          Quem mandar sua pergunta ou pedir ajuda para especialistas? Participe!
+        </h4>
+      </div>
+      <button type="button">Inscreva-se</button>
+    </div>
+  );
 }
 
-export default EventCard
+export default EventCard;
