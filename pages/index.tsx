@@ -1,8 +1,11 @@
 import Head from 'next/head';
-import styles from '../styles/Home.module.css';
 import EventCard from '../components/EventCard';
 import TestimonialCard from '../components/TestimonialCard';
 import CommunityCard from '../components/CommunityCard';
+
+import img1 from '../assets/images/Group 220.svg';
+
+import styles from '../styles/Home.module.css';
 
 export default function Home() {
   return (
@@ -13,8 +16,22 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <div className={styles.banner}>
+        <div className={styles.bannerText}>
+          <h3>Conheça a You Can e nossa rede de pessoas</h3>
+          <h4>
+            Quer se conectar com pessoas de todos os lugares e criar uma rede de
+            ajuda? Venha fazer parte.
+          </h4>
+          <div>
+            <button type="button">Saiba mais</button>
+          </div>
+        </div>
+        <div className={styles.bannerImg}>
+          <img src={img1} alt="img" className={styles.img1} />
+        </div>
+      </div>
       <div className={styles.content}>
-        <h3>Hello</h3>
         <h3>Nossa Comunidade</h3>
         <div className={styles.community}>
           <CommunityCard />

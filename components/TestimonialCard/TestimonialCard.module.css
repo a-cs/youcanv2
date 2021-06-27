@@ -36,6 +36,14 @@
 
 @media (min-width: 700px){
   .Card{
+    margin: 1rem;
+    padding: 3.2rem 1.2rem 5.6rem;
+    flex-basis: 30%;
+  }
+}
+
+@media (min-width: 1100px){
+  .Card{
     margin: 1rem 1rem 1rem;
     padding: 3.2rem 2.4rem 5.6rem;
     flex-basis: 31%;
