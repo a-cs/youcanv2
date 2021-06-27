@@ -4,8 +4,10 @@
   font-size: 62.5%;
 
   --color-background: #E5E5E5;
-  --color-primary:#9A0FAF;
-  --color-secundary:#F07D12;
+  --color-primary:rgba(154, 15, 175, 1);
+  --color-primary-hover:rgba(154, 15, 175, .7);
+  --color-secundary:rgba(251, 132, 23, 1);
+  --color-secundary-hover:rgba(251, 132, 23, .75);
   --color-text-base: #221E1E;
   --color-logo: #000000;
   --color-nav: #090909;

@@ -2,6 +2,7 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import EventCard from '../components/EventCard';
 import TestimonialCard from '../components/TestimonialCard';
+import CommunityCard from '../components/CommunityCard';
 
 export default function Home() {
   return (
@@ -15,6 +16,14 @@ export default function Home() {
       <div className={styles.content}>
         <h3>Hello</h3>
         <h3>Nossa Comunidade</h3>
+        <div className={styles.community}>
+          <CommunityCard />
+          <CommunityCard />
+          <CommunityCard />
+          <CommunityCard />
+          <CommunityCard />
+          <CommunityCard />
+        </div>
         <h3>Depoimentos</h3>
         <div className={styles.testmonials}>
           <TestimonialCard />

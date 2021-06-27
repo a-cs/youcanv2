@@ -43,6 +43,12 @@
   padding: .9rem 4rem;
 }
 
+.Card button:hover{
+  cursor: pointer;
+  background-color: var(--color-secundary-hover);
+  transition: .2s;
+}
+
 @media (min-width: 700px){
   .Card{
     margin: .8rem 4.5rem 4rem;

@@ -20,8 +20,17 @@
   justify-content: center;
 }
 
+.community {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 @media (min-width: 700px){
   .content {
     margin: 0 7.6rem;
+  }
+  .community {
+    margin-left: 3.8rem;
   }
 }
