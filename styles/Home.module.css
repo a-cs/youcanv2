@@ -3,12 +3,18 @@
 }
 
 .content h3 {
-  margin: 4rem 0;
+  margin: 3.2rem 0;
   font-weight:700;
   font-size: 3.2rem;
 }
 
 .events {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.testmonials {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

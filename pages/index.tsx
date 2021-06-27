@@ -1,7 +1,7 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import EventCard from '../components/EventCard';
+import TestimonialCard from '../components/TestimonialCard';
 
 export default function Home() {
   return (
@@ -16,12 +16,16 @@ export default function Home() {
         <h3>Hello</h3>
         <h3>Nossa Comunidade</h3>
         <h3>Depoimentos</h3>
+        <div className={styles.testmonials}>
+          <TestimonialCard />
+          <TestimonialCard />
+          <TestimonialCard />
+          <TestimonialCard />
+          <TestimonialCard />
+        </div>
+
         <h3>Eventos</h3>
         <div className={styles.events}>
-          <EventCard />
-          <EventCard />
-          <EventCard />
-          <EventCard />
           <EventCard />
           <EventCard />
           <EventCard />
