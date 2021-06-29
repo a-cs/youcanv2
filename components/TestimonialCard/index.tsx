@@ -1,22 +1,30 @@
 import styles from './TestimonialCard.module.css';
 
-function TestimonialCard() {
+interface Testimonials {
+  nome: string;
+  idade: string;
+  foto: string;
+  profissão: string;
+  depoimento: string;
+}
+
+function TestimonialCard({
+  nome,
+  idade,
+  foto,
+  profissão,
+  depoimento,
+}: Testimonials) {
   return (
     <div className={styles.Card}>
-      <img
-        src="https://avatars.githubusercontent.com/u/63657280?v=4"
-        alt="Anderson"
-      />
+      <img src={foto} alt={nome} />
       <div className={styles.Title}>
         <h4>
-          Anderson Carneiro Sousa, 28 - <br /> Estudante
+          {nome}, {idade} - <br /> {profissão}
         </h4>
       </div>
       <div className={styles.Text}>
-        <h5>
-          Tive minha vida tranformada com os encontros, vocês não vão se
-          arrepender de participar das reuniôes.
-        </h5>
+        <h5>{depoimento}</h5>
       </div>
     </div>
   );

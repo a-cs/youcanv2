@@ -3,7 +3,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* max-width: 275px; */
+    justify-content: space-between;
+    min-height: 327px;
 }
 
 .Title {
@@ -53,6 +54,8 @@
   .Card{
     margin: .8rem 1.2rem 2rem;
     flex-basis: 30%;
+    width: 275px;
+    overflow-wrap: break-word
   }
 }
 

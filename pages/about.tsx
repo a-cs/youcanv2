@@ -10,7 +10,16 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1>Sobre</h1>
+      <h3>Sobre</h3>
+      <p>
+        There are many variations of passages of Lorem Ipsum available, but the
+        majority have suffered.There are many variations of passages of Lorem
+        Ipsum available, but the majority have suffered. There are many
+        variations of passages of Lorem Ipsum available, but the majority have
+        suffered. There are many variations of passages of Lorem Ipsum
+        available, but the majority have suffered. There are many variations of
+        passages of Lorem Ipsum available, but the majority have suffered.
+      </p>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 
-export default function Home() {
+export default function Community() {
   return (
     <div className={styles.container}>
       <Head>
@@ -10,7 +10,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1>Comunidade</h1>
+      <h3>Se conecte com novas pessoase</h3>
+      <p>
+        Como funciona? Escolha alguém que mais te chamou atenção e entre em
+        contato com essa pessoa e comece seu network, esse é o primeiro passo
+        para conquistar seu objetivo. Juntos vamos longe.
+      </p>
     </div>
   );
 }

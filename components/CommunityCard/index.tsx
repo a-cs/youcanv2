@@ -1,24 +1,27 @@
+import Link from 'next/link';
+
 import styles from './CommunityCard.module.css';
 
-function CommunityCard() {
+interface Communities {
+  nome: string;
+  icone: string;
+  resumo: string;
+  link: string;
+}
+
+function CommunityCard({ nome, icone, resumo, link }: Communities) {
   return (
     <div className={styles.Card}>
-      <img
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQZfVBl4aTsF0MWeX0dTnjOyR9Y6N3eTjm4LzFOoiwi96ITkZNR-L3wwUDa8MJBh9a47A&usqp=CAU"
-        alt="Empreendedorismo"
-      />
+      <img src={icone} alt={nome} />
       <div className={styles.Title}>
-        <h4>Empreendedorismo</h4>
+        <h4>{nome}</h4>
       </div>
       <div className={styles.Text}>
-        <h5>
-          A educação é uma ferramenta de liberdade se conecte com pessoas dessa
-          área.
-        </h5>
+        <h5>{resumo}</h5>
       </div>
-      <a href="https://github.com/a-cs">
+      <Link href={`/community/${link}`}>
         <button type="button">Conhecer</button>
-      </a>
+      </Link>
     </div>
   );
 }

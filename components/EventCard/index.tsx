@@ -1,17 +1,24 @@
 import styles from './EventCard.module.css';
 
-function EventCard() {
+interface Events {
+  nome: string;
+  descricao: string;
+  link: string;
+}
+
+function EventCard({ nome, descricao, link }: Events) {
   return (
     <div className={styles.Card}>
       <div className={styles.Title}>
-        <h4>OPEN INOVATION</h4>
+        <h4>{nome}</h4>
       </div>
       <div className={styles.Text}>
-        <h5>
-          Quem mandar sua pergunta ou pedir ajuda para especialistas? Participe!
-        </h5>
+        <h5>{descricao}</h5>
       </div>
-      <button type="button">Inscreva-se</button>
+
+      <a href={link}>
+        <button type="button">Inscreva-se</button>
+      </a>
     </div>
   );
 }

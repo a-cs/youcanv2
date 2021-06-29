@@ -1,4 +1,6 @@
 import Head from 'next/head';
+import { google } from 'googleapis';
+
 import EventCard from '../components/EventCard';
 import TestimonialCard from '../components/TestimonialCard';
 import CommunityCard from '../components/CommunityCard';
@@ -7,7 +9,48 @@ import img1 from '../assets/images/Group 220.svg';
 
 import styles from '../styles/Home.module.css';
 
-export default function Home() {
+interface Props {
+  eventos: string[];
+  depoimentos: string[];
+  listaComunidades: string[];
+}
+
+export async function getServerSideProps({ query }) {
+  const auth = await google.auth.getClient({
+    scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
+  });
+
+  const sheets = google.sheets({ version: 'v4', auth });
+
+  const response = await sheets.spreadsheets.values.batchGet({
+    spreadsheetId: process.env.SHEET_ID,
+    ranges: ['eventos', 'depoimentos', 'lista_comunidades'],
+  });
+
+  let eventos = response.data.valueRanges[0].values;
+  eventos = eventos?.slice(1);
+  let depoimentos = response.data.valueRanges[1].values;
+  depoimentos = depoimentos?.slice(1);
+  let listaComunidades = response.data.valueRanges[2].values;
+  listaComunidades = listaComunidades?.slice(1);
+  console.log(`-----eventos----- \n${eventos}`);
+  console.log(`-----depoimentos----- \n${depoimentos}`);
+  console.log(`-----lista_Comunidades----- \n${listaComunidades}`);
+
+  return {
+    props: {
+      eventos,
+      depoimentos,
+      listaComunidades,
+    },
+  };
+}
+
+export default function Home({
+  eventos,
+  depoimentos,
+  listaComunidades,
+}: Props) {
   return (
     <div className={styles.container}>
       <Head>
@@ -34,29 +77,40 @@ export default function Home() {
       <div className={styles.content}>
         <h3>Nossa Comunidade</h3>
         <div className={styles.community}>
-          <CommunityCard />
-          <CommunityCard />
-          <CommunityCard />
-          <CommunityCard />
-          <CommunityCard />
-          <CommunityCard />
+          {listaComunidades.map((comunidade, index) => (
+            <CommunityCard
+              key={index}
+              nome={comunidade[0]}
+              icone={comunidade[1]}
+              resumo={comunidade[2]}
+              link={comunidade[3]}
+            />
+          ))}
         </div>
         <h3>Depoimentos</h3>
         <div className={styles.testmonials}>
-          <TestimonialCard />
-          <TestimonialCard />
-          <TestimonialCard />
-          <TestimonialCard />
-          <TestimonialCard />
+          {depoimentos.map((depoimento, index) => (
+            <TestimonialCard
+              key={index}
+              nome={depoimento[0]}
+              idade={depoimento[1]}
+              foto={depoimento[2]}
+              profissão={depoimento[3]}
+              depoimento={depoimento[4]}
+            />
+          ))}
         </div>
 
         <h3>Eventos</h3>
         <div className={styles.events}>
-          <EventCard />
-          <EventCard />
-          <EventCard />
-          <EventCard />
-          <EventCard />
+          {eventos.map((evento, index) => (
+            <EventCard
+              key={index}
+              nome={evento[0]}
+              descricao={evento[1]}
+              link={evento[2]}
+            />
+          ))}
         </div>
       </div>
     </div>
