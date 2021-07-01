@@ -1,9 +1,8 @@
 import Head from 'next/head';
-import { google } from 'googleapis';
 import Link from 'next/link';
 import MemberCard from '../../components/MemberCard';
 
-import getAuthToken from '../../utils/GetAuthToken';
+import GetSheetFromGoogle from '../../utils/GetSheetFromGoogle';
 
 import styles from '../../styles/Community.module.css';
 
@@ -20,17 +19,7 @@ interface Community {
 }
 
 export async function getStaticProps({ params }: Params) {
-  const auth = await getAuthToken();
-
-  const sheets = google.sheets({ version: 'v4', auth });
-
-  const response = await sheets.spreadsheets.values.get({
-    spreadsheetId: process.env.SHEET_ID,
-    range: 'membros',
-  });
-
-  let membros = response.data.values;
-  membros = membros?.slice(1);
+  const membros = await GetSheetFromGoogle('membros');
 
   const comunidades = [...new Set(membros?.map(item => item[3]))].sort();
 
@@ -49,17 +38,7 @@ export async function getStaticProps({ params }: Params) {
 }
 
 export async function getStaticPaths() {
-  const auth = await getAuthToken();
-
-  const sheets = google.sheets({ version: 'v4', auth });
-
-  const response = await sheets.spreadsheets.values.get({
-    spreadsheetId: process.env.SHEET_ID,
-    range: 'membros',
-  });
-
-  let membros = response.data.values;
-  membros = membros?.slice(1);
+  const membros = await GetSheetFromGoogle('membros');
 
   const comunidades = [...new Set(membros?.map(item => item[3]))].sort();
 

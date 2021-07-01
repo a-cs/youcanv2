@@ -1,10 +1,9 @@
 import Head from 'next/head';
-import { google } from 'googleapis';
 
 import EventCard from '../components/EventCard';
 import TestimonialCard from '../components/TestimonialCard';
 import CommunityCard from '../components/CommunityCard';
-import getAuthToken from '../utils/GetAuthToken';
+import GetSheetFromGoogle from '../utils/GetSheetFromGoogle';
 
 import img1 from '../assets/images/Group 220.svg';
 
@@ -17,21 +16,9 @@ interface Props {
 }
 
 export async function getStaticProps() {
-  const auth = await getAuthToken();
-
-  const sheets = google.sheets({ version: 'v4', auth });
-
-  const response = await sheets.spreadsheets.values.batchGet({
-    spreadsheetId: process.env.SHEET_ID,
-    ranges: ['eventos', 'depoimentos', 'lista_comunidades'],
-  });
-
-  let eventos = response.data.valueRanges[0].values;
-  eventos = eventos?.slice(1);
-  let depoimentos = response.data.valueRanges[1].values;
-  depoimentos = depoimentos?.slice(1);
-  let listaComunidades = response.data.valueRanges[2].values;
-  listaComunidades = listaComunidades?.slice(1);
+  const eventos = await GetSheetFromGoogle('eventos');
+  const depoimentos = await GetSheetFromGoogle('depoimentos');
+  const listaComunidades = await GetSheetFromGoogle('lista_comunidades');
 
   return {
     props: {
