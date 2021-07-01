@@ -7,13 +7,19 @@ import getAuthToken from '../../utils/GetAuthToken';
 
 import styles from '../../styles/Community.module.css';
 
+type Params = {
+  params: {
+    selected: string;
+  };
+};
+
 interface Community {
   membrosFiltered: string[];
   comunidades: string[];
   selected: string;
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params }: Params) {
   const auth = await getAuthToken();
 
   const sheets = google.sheets({ version: 'v4', auth });
