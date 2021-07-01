@@ -6,7 +6,7 @@ async function getAuthToken() {
     scopes,
     projectId: process.env.GOOGLE_SHEETS_PROJECTID,
     credentials: {
-      private_key: process.env.GOOGLE_SHEETS_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+      private_key: process.env.GOOGLE_SHEETS_PRIVATE_KEY,
       client_email: process.env.GOOGLE_SHEETS_CLIENT_EMAIL,
     },
   });
