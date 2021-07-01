@@ -4,6 +4,7 @@ import { google } from 'googleapis';
 import EventCard from '../components/EventCard';
 import TestimonialCard from '../components/TestimonialCard';
 import CommunityCard from '../components/CommunityCard';
+import getAuthToken from '../utils/GetAuthToken';
 
 import img1 from '../assets/images/Group 220.svg';
 
@@ -15,10 +16,8 @@ interface Props {
   listaComunidades: string[];
 }
 
-export async function getServerSideProps({ query }) {
-  const auth = await google.auth.getClient({
-    scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
-  });
+export async function getStaticProps() {
+  const auth = await getAuthToken();
 
   const sheets = google.sheets({ version: 'v4', auth });
 
@@ -33,9 +32,6 @@ export async function getServerSideProps({ query }) {
   depoimentos = depoimentos?.slice(1);
   let listaComunidades = response.data.valueRanges[2].values;
   listaComunidades = listaComunidades?.slice(1);
-  console.log(`-----eventos----- \n${eventos}`);
-  console.log(`-----depoimentos----- \n${depoimentos}`);
-  console.log(`-----lista_Comunidades----- \n${listaComunidades}`);
 
   return {
     props: {
@@ -43,6 +39,7 @@ export async function getServerSideProps({ query }) {
       depoimentos,
       listaComunidades,
     },
+    revalidate: 5, // In seconds
   };
 }
 

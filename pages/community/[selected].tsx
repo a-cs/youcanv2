@@ -1,18 +1,20 @@
 import Head from 'next/head';
 import { google } from 'googleapis';
+import Link from 'next/link';
+import MemberCard from '../../components/MemberCard';
+
+import getAuthToken from '../../utils/GetAuthToken';
 
 import styles from '../../styles/Community.module.css';
 
 interface Community {
-  membros: string[];
+  membrosFiltered: string[];
   comunidades: string[];
   selected: string;
 }
 
-export async function getServerSideProps({ query }) {
-  const auth = await google.auth.getClient({
-    scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
-  });
+export async function getStaticProps({ params }) {
+  const auth = await getAuthToken();
 
   const sheets = google.sheets({ version: 'v4', auth });
 
@@ -23,29 +25,52 @@ export async function getServerSideProps({ query }) {
 
   let membros = response.data.values;
   membros = membros?.slice(1);
-  console.log(`-----membros----- \n${membros}`);
 
-  const comunidades = [...new Set(membros.map(item => item[2]))].sort();
+  const comunidades = [...new Set(membros.map(item => item[3]))].sort();
 
-  console.log(`-----comunidades----- \n${comunidades}`);
-  const { selected } = query;
+  const { selected } = params;
 
-  console.log(`-----selected-----`);
-  console.log(selected);
+  const membrosFiltered = membros?.filter(membro => membro[3] === selected);
 
   return {
     props: {
-      membros,
+      membrosFiltered,
       comunidades,
       selected,
     },
+    revalidate: 5, // In seconds
+  };
+}
+
+export async function getStaticPaths() {
+  const auth = await getAuthToken();
+
+  const sheets = google.sheets({ version: 'v4', auth });
+
+  const response = await sheets.spreadsheets.values.get({
+    spreadsheetId: process.env.SHEET_ID,
+    range: 'membros',
+  });
+
+  let membros = response.data.values;
+  membros = membros?.slice(1);
+
+  const comunidades = [...new Set(membros.map(item => item[3]))].sort();
+
+  const paths = comunidades.map(comunidade => ({
+    params: { selected: comunidade },
+  }));
+
+  return {
+    paths,
+    fallback: false,
   };
 }
 
 export default function Community({
   selected,
   comunidades,
-  membros,
+  membrosFiltered,
 }: Community) {
   return (
     <div className={styles.container}>
@@ -63,18 +88,31 @@ export default function Community({
       </p>
 
       <div className={styles.communities}>
-        <h4 id={styles.selected}>Educação</h4>
-        <h4>Design e Comunicação</h4>
-        <h4>Empreendedorismo</h4>
-        <h4>Tecnologia</h4>
-        <h4>Direito</h4>
-        <h4>Política</h4>
-        <h4>Bolsa de estudos</h4>
-        <h4>Carreira</h4>
-        <h4>Inclusão Social</h4>
-        <h4>Impacto Social</h4>
-        <h4>Autoconhecimento</h4>
-        <h4>Liderança</h4>
+        {comunidades.map((comunidade, index) => (
+          <div
+            className={
+              comunidade === selected ? styles.selected : styles.notSelected
+            }
+            key={index}
+          >
+            <Link href={`/community/${comunidade}`}>{comunidade}</Link>
+          </div>
+        ))}
+      </div>
+
+      <div className={styles.members}>
+        {membrosFiltered.map((membro, index) => (
+          <MemberCard
+            key={index}
+            nome={membro[0]}
+            idade={membro[1]}
+            foto={membro[2]}
+            resumo={membro[4]}
+            instagram={membro[5]}
+            linkedin={membro[6]}
+            facebook={membro[7]}
+          />
+        ))}
       </div>
     </div>
   );

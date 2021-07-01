@@ -49,7 +49,7 @@
     color: var(--color-primary);
     border-bottom: 3px solid var(--color-primary);
     font-weight: 900;
-    transition: .05s;
+    transition: .02s;
 }
 
 

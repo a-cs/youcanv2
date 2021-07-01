@@ -1,7 +1,9 @@
 import Head from 'next/head';
 import { google } from 'googleapis';
+import Link from 'next/link';
 
 import MemberCard from '../../components/MemberCard';
+import getAuthToken from '../../utils/GetAuthToken';
 
 import styles from '../../styles/Community.module.css';
 
@@ -10,10 +12,8 @@ interface Community {
   comunidades: string[];
 }
 
-export async function getServerSideProps({ query }) {
-  const auth = await google.auth.getClient({
-    scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
-  });
+export async function getStaticProps() {
+  const auth = await getAuthToken();
 
   const sheets = google.sheets({ version: 'v4', auth });
 
@@ -24,18 +24,15 @@ export async function getServerSideProps({ query }) {
 
   let membros = response.data.values;
   membros = membros?.slice(1);
-  console.log(`-----membros----- \n${membros}`);
 
   const comunidades = [...new Set(membros.map(item => item[3]))].sort();
-
-  console.log(`-----comunidades----- \n${comunidades}`);
-  console.log(`-----query----- \n${query}`);
 
   return {
     props: {
       membros,
       comunidades,
     },
+    revalidate: 5, // In seconds
   };
 }
 
@@ -48,7 +45,7 @@ export default function Community({ comunidades, membros }: Community) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h3>Se conecte com novas pessoase</h3>
+      <h3>Se conecte com novas pessoas</h3>
       <p>
         Como funciona? Escolha alguém que mais te chamou atenção e entre em
         contato com essa pessoa e comece seu network, esse é o primeiro passo
@@ -57,7 +54,9 @@ export default function Community({ comunidades, membros }: Community) {
 
       <div className={styles.communities}>
         {comunidades.map((comunidade, index) => (
-          <h4 key={index}>{comunidade}</h4>
+          <div className={styles.notSelected} key={index}>
+            <Link href={`/community/${comunidade}`}>{comunidade}</Link>
+          </div>
         ))}
       </div>
 
