@@ -25,7 +25,7 @@ export async function getStaticProps() {
   let membros = response.data.values;
   membros = membros?.slice(1);
 
-  const comunidades = [...new Set(membros.map(item => item[3]))].sort();
+  const comunidades = [...new Set(membros?.map(item => item[3]))].sort();
 
   return {
     props: {

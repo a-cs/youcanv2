@@ -32,7 +32,7 @@ export async function getStaticProps({ params }: Params) {
   let membros = response.data.values;
   membros = membros?.slice(1);
 
-  const comunidades = [...new Set(membros.map(item => item[3]))].sort();
+  const comunidades = [...new Set(membros?.map(item => item[3]))].sort();
 
   const { selected } = params;
 
@@ -61,7 +61,7 @@ export async function getStaticPaths() {
   let membros = response.data.values;
   membros = membros?.slice(1);
 
-  const comunidades = [...new Set(membros.map(item => item[3]))].sort();
+  const comunidades = [...new Set(membros?.map(item => item[3]))].sort();
 
   const paths = comunidades.map(comunidade => ({
     params: { selected: comunidade },
