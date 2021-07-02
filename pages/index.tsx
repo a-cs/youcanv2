@@ -67,7 +67,6 @@ export default function Home({
               nome={comunidade[0]}
               icone={comunidade[1]}
               resumo={comunidade[2]}
-              link={comunidade[3]}
             />
           ))}
         </div>

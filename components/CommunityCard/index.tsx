@@ -6,10 +6,9 @@ interface Communities {
   nome: string;
   icone: string;
   resumo: string;
-  link: string;
 }
 
-function CommunityCard({ nome, icone, resumo, link }: Communities) {
+function CommunityCard({ nome, icone, resumo }: Communities) {
   return (
     <div className={styles.Card}>
       <img src={icone} alt={nome} />
@@ -19,7 +18,7 @@ function CommunityCard({ nome, icone, resumo, link }: Communities) {
       <div className={styles.Text}>
         <h5>{resumo}</h5>
       </div>
-      <Link href={`/community/${link}`}>
+      <Link href={`/community/${nome}`}>
         <button type="button">Conhecer</button>
       </Link>
     </div>
