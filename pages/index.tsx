@@ -26,7 +26,7 @@ export async function getStaticProps() {
       depoimentos,
       listaComunidades,
     },
-    revalidate: 5, // In seconds
+    revalidate: 30, // In seconds
   };
 }
 

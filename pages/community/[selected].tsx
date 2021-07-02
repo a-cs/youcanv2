@@ -33,7 +33,7 @@ export async function getStaticProps({ params }: Params) {
       comunidades,
       selected,
     },
-    revalidate: 5, // In seconds
+    revalidate: 30, // In seconds
   };
 }
 

@@ -21,7 +21,7 @@ export async function getStaticProps() {
       membros,
       comunidades,
     },
-    revalidate: 5, // In seconds
+    revalidate: 30, // In seconds
   };
 }
 
